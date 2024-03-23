@@ -30,6 +30,11 @@ public class Main {
                 })
                 .get("/v1/{id}.json", ctx -> {
                     var id = ctx.pathParam("id");
+                    if (id.contains("@")){
+                        ctx.status(418);
+                        ctx.result("im a shiggy");
+                        return;
+                    }
                     var info = Communications.GetBaseJson(botToken, id);
                     if (info == null) {
                         ctx.status(400);
@@ -42,6 +47,11 @@ public class Main {
                 })
                 .get("/v1/{id}/avatar*", ctx -> {
                     var id = ctx.pathParam("id");
+                    if (id.contains("@")){
+                        ctx.status(418);
+                        ctx.result("im a shiggy");
+                        return;
+                    }
                     var userData = Communications.GetBaseJson(botToken, id);
                     if (userData == null) {
                         ctx.status(400);
